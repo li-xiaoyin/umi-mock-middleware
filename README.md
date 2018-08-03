@@ -1,9 +1,9 @@
 # umi-mock-middleware
 
-#### 项目介绍
+## 项目介绍
 ​	umi-mock-middleware是从umi代码中单独摘取出了mock中间件相关的独立代码，使之可以在React之外的环境，比如Vue中使用。功能更独立，更专一，使用更方便。
 
-​	如果想了解更多umijs的信息，请移步[umijs官网](https://umijs.org/)
+​	如果想了解更多umijs的信息，请移步[umijs官网](https://umijs.org/)，同时感谢umi对开源事业的贡献。
 
 ## 安装
 
