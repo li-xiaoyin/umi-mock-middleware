@@ -1,39 +1,56 @@
 # umi-mock-middleware
 
 #### 项目介绍
-{**以下是码云平台说明，您可以替换为您的项目简介**
-码云是开源中国推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+​	umi-mock-middleware是从umi代码中单独摘取出了mock中间件相关的独立代码，使之可以在React之外的环境，比如Vue中使用。功能更独立，更专一，使用更方便。
 
-#### 软件架构
-软件架构说明
+​	如果想了解更多umijs的信息，请移步[umijs官网](https://umijs.org/)
 
+## 安装
 
-#### 安装教程
+```
+npm install umi-mock-middleware
+```
 
-1. xxxx
-2. xxxx
-3. xxxx
+## 使用
 
-#### 使用说明
+​	以Vue CLI3为例，首先注册中间件，修改vue.config.js，如果没有在项目根文件夹下新建一个，关键代码如下：
 
-1. xxxx
-2. xxxx
-3. xxxx
+```javascript
+const path = require("path");
+const { createMockMiddleware } = require("umi-mock-middleware");
 
-#### 参与贡献
+module.exports = {
+  devServer: {
+    before: app => {
+      if (process.env.MOCK !== "none" && process.env.HTTP_MOCK !== "none") {
+        app.use(createMockMiddleware());
+      }
+    }
+  }
+};
+```
 
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+​	在项目根文件夹下创建 `.umirc.mock.js` ，示例代码如下：
 
+```javascript
+module.exports = {
+  ...require("./mock/index"),
+  // 这里可以引入任意的mock文件，位置也随意。
+};
+```
 
-#### 码云特技
+​	在项目根文件夹下创建mock文件夹，在其中创建index.js，位置和文件名无所谓，在 `.umirc.mock.js` 中引用即可。
 
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [http://git.mydoc.io/](http://git.mydoc.io/)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+```javascript
+module.exports = {
+  // 以HTTP动词和URL为Key，映射一个处理句柄。
+  [`GET /index`](req, res) {
+    // 返回你的mock数据。比如：
+    res.json({
+        success: true
+    })
+  }
+};
+```
+
+​	到此你的mock数据已经可以访问了，当修改mock数据的时候，中间件会自动刷新，无需重启。

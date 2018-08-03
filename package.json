@@ -1,0 +1,23 @@
+{
+  "name": "umi-mock-middleware",
+  "version": "1.0.0",
+  "description": "umi-mock-middleware是从umi代码中单独摘取出了mock中间件相关的独立代码，使之可以在React之外的环境，比如Vue中使用。功能更独立，更专一，使用更方便。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/li-xiaoyin/easy-mock-node.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "chokidar": "^2.0.4",
+    "debug": "^3.1.0",
+    "glob": "^7.1.2",
+    "path-to-regexp": "^2.2.1"
+  },
+  "author": "li-xiaoyin",
+  "license": "ISC"
+}
